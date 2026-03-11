@@ -1,13 +1,24 @@
-function TopicsBar() {
+import { NavLink } from "react-router-dom";
+
+function TopicsBar({ techId, topicId, topicOrder, basePath = "/learn", title = "Topics" }) {
   return (
     <div className="topics-bar">
-      <span className="topic-title">Topics:</span>
+      <span className="topic-title">{title}:</span>
 
-      <a href="#introduction">Introduction</a>
-      <a href="#why">Why It Is Used</a>
-      <a href="#concepts">Core Concepts</a>
-      <a href="#example">Example</a>
-      <a href="#best">Best Practices</a>
+      {topicOrder.map((id) => (
+        <NavLink
+          key={id}
+          to={`${basePath}/${techId}/${id}`}
+          className={({ isActive }) =>
+            `topic-link ${isActive || id === topicId ? "active" : ""}`
+          }
+        >
+          {id
+            .split("-")
+            .map((p) => p[0]?.toUpperCase() + p.slice(1))
+            .join(" ")}
+        </NavLink>
+      ))}
     </div>
   );
 }

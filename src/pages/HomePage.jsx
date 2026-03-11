@@ -1,4 +1,6 @@
-function HomePage({ enterSite }) {
+import { Link } from "react-router-dom";
+
+function HomePage() {
   return (
     <div className="home">
       <h1 className="home-title">MR.TECHY</h1>
@@ -10,9 +12,23 @@ function HomePage({ enterSite }) {
         systems.
       </p>
 
-      <button className="enter-btn" onClick={enterSite}>
-        Next
-      </button>
+      <div className="home-actions">
+        <Link className="home-card" to="/learn/react/introduction">
+          <div className="home-card-title">Web Development</div>
+          <div className="home-card-desc">
+            Learn React, Node.js, MySQL, CSS and build real projects.
+          </div>
+          <div className="home-card-cta">Open →</div>
+        </Link>
+
+        <Link className="home-card" to="/aptitude/quantitative/introduction">
+          <div className="home-card-title">Aptitude</div>
+          <div className="home-card-desc">
+            Quantitative, logical reasoning, verbal ability, puzzles.
+          </div>
+          <div className="home-card-cta">Open →</div>
+        </Link>
+      </div>
 
       <p className="dev-note">🚧 Under Development</p>
     </div>

@@ -10,26 +10,25 @@ import MySQLSection from "../sections/MySQLSection";
 import CSSSection from "../sections/CSSSection";
 
 function MainPage() {
-  const [showSidebar, setShowSidebar] = useState(true);
+  const [open, setOpen] = useState(true);
+  const [topic, setTopic] = useState("intro");
 
   return (
     <div className="main-page">
       <Header />
-
       <TopicsBar />
 
-      {/* Toggle Button */}
-      <button
-        className="toggle-btn"
-        onClick={() => setShowSidebar(!showSidebar)}
-      >
-        {showSidebar ? "Hide Tools" : "Show Tools"}
-      </button>
-
       <div className="layout">
-        {showSidebar && <Sidebar />}
+        <div className="sidebar-wrapper">
+          <div className="sidebar-toggle" onClick={() => setOpen(!open)}>
+            {open ? "❮" : "❯"}
+          </div>
 
-        <main className="content">
+          <Sidebar className={open ? "sidebar open" : "sidebar closed"} />
+        </div>
+
+        <main className={`content ${open ? "sidebar-open" : "sidebar-closed"}`}>
+          <ReactSection topic={topic} />
           <ReactSection />
           <NodeSection />
           <MySQLSection />

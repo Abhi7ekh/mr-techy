@@ -1,27 +1,26 @@
-function Sidebar() {
-  return (
-    <aside className="sidebar">
-      <h3>Tools</h3>
+import { NavLink } from "react-router-dom";
 
-      <ul>
-        <li>
-          <a href="#react">⚛ React</a>
-        </li>
-        <li>
-          <a href="#node">⬢ Node.js</a>
-        </li>
-        <li>
-          <a href="#mysql">🗄 MySQL</a>
-        </li>
-        <li>
-          <a href="#css">🎨 CSS</a>
-        </li>
-        <li>
-          <a href="#git">🔧 Git</a>
-        </li>
-        <li>
-          <a href="#docker">🐳 Docker</a>
-        </li>
+function Sidebar({ technologies, techId, topicId, basePath = "/learn", title = "Technologies" }) {
+  return (
+    <aside className="sidebar" aria-label={title}>
+      <h3 className="sidebar-title">{title}</h3>
+
+      <ul className="sidebar-list">
+        {technologies.map((t) => (
+          <li key={t.id} className="sidebar-item">
+            <NavLink
+              to={`${basePath}/${t.id}/${topicId ?? t.topicOrder[0]}`}
+              className={({ isActive }) =>
+                `sidebar-link ${isActive || t.id === techId ? "active" : ""}`
+              }
+            >
+              <span className="sidebar-icon" aria-hidden="true">
+                {t.icon}
+              </span>
+              <span className="sidebar-label">{t.label}</span>
+            </NavLink>
+          </li>
+        ))}
       </ul>
     </aside>
   );
